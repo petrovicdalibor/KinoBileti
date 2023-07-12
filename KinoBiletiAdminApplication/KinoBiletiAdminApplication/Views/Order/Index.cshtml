@@ -1,0 +1,44 @@
+﻿﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<KinoBiletiAdminApplication.Models.Order>
+<div class="container">
+
+    <div class="row">
+        <a class="brn btn-outline-success" asp-controller="Order" asp-action="ExportAllOrders">Export Orders</a>
+    </div>
+
+    <div class="row m-5">
+        <table class="table">
+            <thead class="thead-dark" style="width:200px;">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Клиент</th>
+                    <th scope="col">Број на продукти</th>
+                    
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    var item = Model[i];
+                <tr>
+                    <th scope="row">@(i+1)</th>
+                    <td>@item.User.UserName</td>
+                    <td>@item.ProductInOrders.Count</td>
+
+                    <td><a class="btn btn-outline-secondary" asp-action="CreateInvoice" asp-route-id="@item.Id">Create Invoice</a></td>
+                    <td><a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id">Details</a></td>
+                </tr>
+                }
+            </tbody>
+
+            
+        </table>
+    </div>
+
+</div>
